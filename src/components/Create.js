@@ -1,11 +1,12 @@
 import React, { useState, useContext } from 'react';
-import { FaCamera } from 'react-icons/fa';
 import { FcMms } from 'react-icons/fc';
+import { BiWebcam } from 'react-icons/bi';
+import { Line } from 'rc-progress';
 
 import { ContextProvider } from './../Global/Context';
 
 function Create() {
-    const { create, loader, user } = useContext(ContextProvider);
+    const { create, loader, user, postUploadProgress } = useContext(ContextProvider);
     const [title, setTitle] = useState('');
     const [image, setImage] = useState('');
     
@@ -24,7 +25,8 @@ function Create() {
         <> 
             { !loader && user ?
                 <div className="create">
-                    <form onSubmit={createPost}>
+                    {postUploadProgress > 0 ?<Line className="create__progressBar" percent={postUploadProgress} strokeWidth="3" strokeColor="blue" />
+                    :""}<form onSubmit={createPost}>
                         <div className="create__input">
                             <input 
                                 type="text" 
@@ -39,7 +41,7 @@ function Create() {
                             <div className="create__second-a">
                                 <label htmlFor="file">
                                     {image ? 
-                                        <FcMms className="camera1" /> :
+                                        <BiWebcam className="camera1" /> :
                                         <FcMms className="camera2" />
                                     }
                                 </label>

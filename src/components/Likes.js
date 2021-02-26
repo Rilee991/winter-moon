@@ -19,7 +19,6 @@ function Likes(props) {
 
     const deleteLike = (event) => {
         event.preventDefault();
-        console.log("e");
         removeLike({
             id: props.id
         });
@@ -35,7 +34,7 @@ function Likes(props) {
         <div className="likes">
             {!loader && user ? (likes.includes(email) ?
                 <div className="likes__icon"><FcLike className="likes__icon-button" onClick={deleteLike}/></div> :
-                <div className="likes__icon"><HiOutlineHeart className="likes__icon-button" onClick={addLike} /></div>) : null
+                <div className="likes__icon"><HiOutlineHeart className="likes__icon-button" onClick={addLike} /></div>): null
             }
             <div className="likes__length">{likes? likes.length:0} likes</div>
             <div className="likes__body">

@@ -14,7 +14,8 @@ function Context(props) {
     const [posts, setPosts] = useState([]);
     const [manualUser, setManualUser] = useState({});
     const DEFAULT_PROFILE_IMAGE = "https://firebasestorage.googleapis.com/v0/b/winter-moon-6261b.appspot.com/o/defaultPics%2FdefaultProfilePicture.png?alt=media&token=e1abef6c-7e3b-496b-b7de-19a43c929f56";
-    
+    const [postUploadProgress, setPostUploadProgress] = useState(0);
+
     const openModel = () => {
         setModel(true);
     }
@@ -58,12 +59,14 @@ function Context(props) {
             const resp = await auth.signInWithEmailAndPassword(email, password);
             setModel(false);
             db.collection("users").where("email", "==", email).get().then(userSnap => {
-                const { username, email, bio, image } = userSnap.docs[0].data();
+                const { username, email, bio, image, followers = [], following = [] } = userSnap.docs[0].data();
                 setManualUser({
                     username,
                     email,
                     bio,
-                    image
+                    image,
+                    followers,
+                    following
                 });
             });
         } catch (error) {
@@ -93,12 +96,14 @@ function Context(props) {
         upload.on("state_changed", (snap) => {
             //progress
             let progress = (snap.bytesTransferred/snap.totalBytes) * 100;
+            setPostUploadProgress(progress);
             console.log(progress);
         }, (err) => {
             //error
             console.log(err);
         }, () => {
             //success
+            setPostUploadProgress(0);
             storage.ref("images")
                     .child(image.name)
                     .getDownloadURL()
@@ -146,6 +151,11 @@ function Context(props) {
                 publishLike(data);
             }
         });
+    }
+
+    const removePost = (data) => {
+        const { id } = data;
+        db.collection("posts").doc(id).delete();
     }
 
     const removeLike = (data) => {
@@ -197,12 +207,14 @@ function Context(props) {
 
             if(user) {
                 db.collection("users").where("email", "==", user.email).get().then(userSnap => {
-                    const { username, email, bio, image } = userSnap.docs[0].data();
+                    const { username, email, bio, image, followers = [], following = [] } = userSnap.docs[0].data();
                     setManualUser({
                         username,
                         email,
                         bio,
-                        image
+                        image,
+                        followers,
+                        following
                     });
                 });
             }
@@ -221,7 +233,15 @@ function Context(props) {
                     postedAt: doc.data().currentTime ? moment(doc.data().currentTime.seconds*1000).format("h:mm A, ddd DD MMM YYYY") : "..."
                 }
             )));
-        })
+        });
+
+        posts.map(doc => {
+            db.collection("users").where("username", "==", doc.username).get().then(userSnap => {
+                console.log(userSnap.docs[0] ? userSnap.docs[0].data() : "null");
+                const image = userSnap.docs[0] ? userSnap.docs[0].data() : DEFAULT_PROFILE_IMAGE;
+                doc.userProfileImage = image;
+            });
+        });
 
     }, [user, loader]);
 
@@ -243,7 +263,9 @@ function Context(props) {
             updateLikes,
             manualUser,
             DEFAULT_PROFILE_IMAGE,
-            updateUser
+            updateUser,
+            postUploadProgress,
+            removePost
         }}>
             {props.children}
         </ContextProvider.Provider>

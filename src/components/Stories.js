@@ -15,7 +15,7 @@ function Stories() {
         { id: 3, image: pic3, name: 'de villiers' }, 
         { id: 4, image: pic4, name: 'watsn' }, 
         { id: 5, image: pic5, name: 'harilal' }, 
-        { id: 6, image: pic6, name: 'fuck.me' }, 
+        { id: 6, image: pic6, name: 'comeone' }, 
         { id: 7, image: pic7, name: 'awesome.dude' }
     ]);
 

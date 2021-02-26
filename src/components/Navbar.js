@@ -8,7 +8,6 @@ import WinterMoonLogo from '../images/winter-moon.png';
 
 function Navbar() {
     const { model, openModel, user, loader, logout } = useContext(ContextProvider);
-    console.log(model);
 
     const openForms = () => {
         openModel();

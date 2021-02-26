@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import  { TiCamera, TiInfoLargeOutline } from 'react-icons/ti';
 import { SiMinutemailer } from 'react-icons/si';
-import { MdPerson } from 'react-icons/md';
+import { MdPerson, MdCallMade, MdCallReceived } from 'react-icons/md';
 import { FcCameraIdentification, FcCamera } from 'react-icons/fc';
 
 import { ContextProvider } from './../Global/Context';
@@ -9,7 +9,7 @@ import { db } from '../config';
 
 function Profile() {
     const { manualUser, DEFAULT_PROFILE_IMAGE, updateUser } = useContext(ContextProvider);
-    const { username, email, bio, image } = manualUser;
+    const { username, email, bio, image, followers = [], following = [] } = manualUser;
     const [posts, setPosts] = useState([]);
     const [newImage, setNewImage] = useState('');
 
@@ -74,6 +74,14 @@ function Profile() {
                     <div className="profile__details">
                         <TiInfoLargeOutline className="profile__details__icon"/>
                         <div className="profile__details__item">{bio ? bio : "..."}</div>
+                    </div>
+                    <div className="profile__details">
+                        <MdCallReceived className="profile__details__icon"/>
+                        <div className="profile__details__item">{followers ? followers.length : 0} followers</div>
+                    </div>
+                    <div className="profile__details">
+                        <MdCallMade className="profile__details__icon"/>
+                        <div className="profile__details__item">{following ? following.length : 0} following</div>
                     </div>
                 </div>
             </div>

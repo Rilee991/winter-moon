@@ -94,6 +94,13 @@ body {
   cursor: pointer;
 }
 
+.posts__header-delete {
+  display: inline-block;
+  margin: 0 10px;
+  cursor: pointer;
+  margin-left: 80%;
+}
+
 .navbar__icons {
   font-size: 25px;
 }
@@ -422,12 +429,36 @@ body {
   text-transform: uppercase;
 }
 
+.posts__header-avator img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: purple;
+  text-transform: uppercase;
+}
+
 .posts__header-name {
   margin-left: 8px;
+  margin-top: 7px;
   overflow: hidden;
 }
 
+.posts_header-link {
+  text-decoration: none;
+  display: flex;
+}
+
 .posts__img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.posts__img video {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -478,6 +509,17 @@ body {
   font-size: 30px;
   color: rgb(199, 14, 14);
   cursor: pointer;
+  transition-property: all;
+  transition-duration: 1s;
+  transition-timing-function: steps(28);
+  transition-delay: 0s;
+}
+
+.likes__icon-buttonnew {
+  /* font-size: 10px; */
+  /* color: rgb(199, 14, 14); */
+  cursor: pointer;
+  margin: 200px;
 }
 
 .likes__body {
@@ -570,6 +612,14 @@ body {
 }
 
 @media(max-width: 1200px) {
+
+  .posts__header-delete {
+    display: inline-block;
+    margin: 0 10px;
+    cursor: pointer;
+    margin-left: 60%;
+  }
+
   .navbar {
     padding: 0 20px;
   }
@@ -617,5 +667,39 @@ body {
     border-radius: 3px;
     border: 1px solid #efefef;
     overflow: hidden;
+  }
+
+  .create__progressBar {
+    height: 30px;
+    border: 1px solid white;
+    width: 100%;
+  }
+
+  .profile__top__left__img {
+    width: 80px;
+    height: 70px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 1px solid silver;
+    padding: 3px;
+    background: black; 
+    background: -moz-linear-gradient(45deg, #00AEEF 0%, #fff 25%, #00AEEF 50%, #fff 75%, #00AEEF 100%); 
+    background: -webkit-linear-gradient(45deg, #00AEEF 0%,#fff 25%,#00AEEF 50%,#fff 75%,#00AEEF 100%); 
+    background: linear-gradient(45deg, #00AEEF 0%,#fff 25%,#00AEEF 50%,#fff 75%,#00AEEF 100%); 
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f09433', endColorstr='#bc1888',GradientType=1 );
+  }
+  
+  .profile__top__left__img span {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+  
+  .profile__top__left__img span img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 }

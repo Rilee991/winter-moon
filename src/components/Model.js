@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 
 import { ContextProvider } from './../Global/Context';
-import InstagramLogo from '../images/instagram-logo.png'
+import WinterMoonLogo from '../images/winter-moon.png';
 
 function Model() {
     const { model, closeModel, register, login } = useContext(ContextProvider);
@@ -50,7 +50,6 @@ function Model() {
 
     const loginUser = (event) => {
         event.preventDefault();
-        console.log(inputs);
         login(inputs);
     }
 
@@ -65,7 +64,7 @@ function Model() {
                                     <div className="model__form">
                                         <form onSubmit={registerUser}>
                                             <div className="model__group">
-                                                <img src={InstagramLogo} alt="winter-moon-logo"/>
+                                                <img src={WinterMoonLogo} alt="winter-moon-logo"/>
                                             </div>
                                             <div className="model__group">
                                                 <input type="text" name="username" className="model__input" placeholder="Username..." onChange={handleInputs} value={inputs.username} required />
@@ -89,7 +88,7 @@ function Model() {
                                     <div className="model__form">
                                         <form onSubmit={loginUser}>
                                             <div className="model__group">
-                                                <img src={InstagramLogo} alt="winter-moon-logo"/>
+                                                <img src={WinterMoonLogo} alt="winter-moon-logo"/>
                                             </div>
                                             <div className="model__group">
                                                 <input type="text" name="email" className="model__input" placeholder="Email..." onChange={handleInputs} value={inputs.email} required/>
