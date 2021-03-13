@@ -27,6 +27,9 @@ function App() {
           <Route path="/profile">
             <Profile />
           </Route>
+          <Route exact path="/profile/:id">
+            <Profile />
+          </Route>
         </div>
       </Context>
     </Router>

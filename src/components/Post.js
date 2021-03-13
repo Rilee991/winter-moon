@@ -34,7 +34,7 @@ function Post() {
                                 <div className="posts__header-name">{post.username}</div>
                             </Link> :
                             <Link
-                                to="/profile"
+                                to={`/profile/${post.id}`}
                                 className="posts_header-link"
                             >
                                 <div className="posts__header-avator">{post.username[0]}</div>

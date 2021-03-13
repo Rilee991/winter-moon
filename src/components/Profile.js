@@ -87,9 +87,14 @@ function Profile() {
             </div>
             <hr />
             <div className="profile__bottom">
-                {posts ? posts.map(post => (
-                    <img className="profile__bottom__posts" key={post.id} src={post.image}/>
-                )): "Please wait..."}
+                {posts ? posts.map(post => {
+                    // {post.image.includes(".jpg") || post.image.includes(".png") ? (<img className="profile__bottom__posts" src={post.image} alt="posts"/>)
+                    // :    (<video className="profile__bottom__posts" width="120" height="100" controls autoplay>
+                    //         <source src={post.image} type="video/mp4"/>
+                    //     </video>)
+                    // }
+                    return <img className="profile__bottom__posts" key={post.id} src={post.image}/>
+                    }): "Please wait..."}
             </div>
         </div>
     )
